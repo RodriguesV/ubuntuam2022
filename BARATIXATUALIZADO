@@ -25,6 +25,7 @@ public static void main(String[] args) {
 		char ctzCliente = 'n';
 		int opcao;
 		int quantidadeEscolhida = 0;
+		String codigoEscolhido = "";
 		
 		//tela inicial
 		
@@ -49,16 +50,24 @@ public static void main(String[] args) {
 							System.out.printf(codigo[i] + "\t | " + produto[i] + "\t | " + estoque[i] + "\t\t | " + valor[i] + "\n" );
 							System.out.println("-------------------------------------------------------------------");
 						}
-						System.out.print("Selecione do codigo do produto: ");
-						String codigoEscolhido = leia.next();//mudança
+						
+						System.out.print("Digite do codigo do produto: ");
+						codigoEscolhido = leia.next();
+						
+						while (Arrays.asList(codigo).contains(codigoEscolhido)!=true) {
+							System.out.println("Codigo inválido! Digite o código corretamente, por exemplo(GRP04-01)");
+							System.out.print("Digite do codigo do produto: ");
+							codigoEscolhido = leia.next();
+						}
 						System.out.println(" ");
 						System.out.println("Produto\t\t |     Valor\t | Estoque");
+						 
 						
 						int posicao = Arrays.binarySearch(codigo, codigoEscolhido);
 						System.out.println(produto[posicao] + " |     R$" + valor[posicao] + " \t |  " + estoque[posicao] + "\n");
 						System.out.print("Digite a quantidade: ");
 						quantidadeEscolhida = leia.nextInt();  
-								
+							
 						while (quantidadeEscolhida>estoque[posicao]) {
 									System.out.println("Digite um valor de acordo com o estoque!");
 									System.out.println("Digite a quantidade: ");
