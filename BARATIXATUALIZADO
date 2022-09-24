@@ -26,6 +26,8 @@ public static void main(String[] args) {
 		int opcao;
 		int quantidadeEscolhida = 0;
 		String codigoEscolhido = "";
+		String testeCodigo = "";
+		double valorTotal = 0.00;
 		
 		//tela inicial
 		
@@ -57,6 +59,12 @@ public static void main(String[] args) {
 						while (Arrays.asList(codigo).contains(codigoEscolhido)!=true) {
 							System.out.println("Codigo inválido! Digite o código corretamente, por exemplo(GRP04-01)");
 							System.out.print("Digite do codigo do produto: ");
+							codigoEscolhido = leia.next();	
+						}
+						// teste 
+							System.out.println("O mesmo codigo não pode ser digitado mais de uma vez!");
+							System.out.print("Digite do codigo do produto: ");
+							while (testeCodigo.contains(codigoEscolhido)==true) {
 							codigoEscolhido = leia.next();
 						}
 						System.out.println(" ");
@@ -80,23 +88,28 @@ public static void main(String[] args) {
 						System.out.println("=====================Produtos adiconados===================");
 						System.out.println("Codigo\t\t|   Produto\t        | valor | qtde");		
 						System.out.println(carrinho);
-						System.out.println("O valor da compra até o momento é: R$" + formatador.format(valorCarrinho) ); 
+						System.out.println("O valor da compra até o momento é: R$" + formatador.format(valorCarrinho) + " + 9% de imposto " ); 
 						System.out.println("    ");
 						System.out.print("Deseja continuar a compra? 'S' para sim ou 'N' para não: ");
 						resposta = leia.next().charAt(0); 
+						testeCodigo = testeCodigo + codigoEscolhido;
 				        }
 					   				while(resposta != 'N');
 				
-				 pgAvista = valorCarrinho - (valorCarrinho*0.10);
-				 pgCartao = valorCarrinho*1.10;
-				 pgParcelado = valorCarrinho*1.15;
+				 imposto = valorCarrinho*0.09;	
+                 valorTotal = valorCarrinho + imposto;
+				 pgAvista = valorTotal - (valorTotal*0.10);
+				 pgCartao = valorTotal*1.10;
+				 pgParcelado = valorTotal*1.15;
 				 parcela = pgParcelado/2;
-				
+                
+                 
 				 do {
 					 System.out.println("Carrinho de compras\n" + carrinho + "\n");
-					 System.out.println("----------------------------------------------");
-					 System.out.println("O valor total da sua compra é: R$" + formatador.format(valorCarrinho) );
-					 System.out.println("----------------------------------------------");
+					 System.out.println("--------------------------------------------------------------------------------------------");
+					 System.out.println("O valor da sua compra é: R$" + formatador.format(valorCarrinho) + " + " + formatador.format(imposto) + " equivalente a 9% de imposto");
+					 System.out.println("O valor total da sua compra é: R$" + formatador.format(valorTotal));
+					 System.out.println("--------------------------------------------------------------------------------------------");
 					 System.out.println("Formas de pagamento: \n");
 					 System.out.println("(1)Pagamento à vista com 10% de desconto: R$"+ formatador.format(pgAvista));
 					 System.out.println("--------------------------------------------------------------------------------------------");
@@ -133,7 +146,7 @@ public static void main(String[] args) {
 				 		System.out.println("                    Nota fiscal");
 				 		System.out.println("Codigo\t\t|   Produto\t        | valor | qtde");
 				 		System.out.println(carrinho);
-				 		System.out.println("O valor total da sua compra é: R$" + formatador.format(valorCarrinho) );
+				 		System.out.println("O valor total da sua compra é: R$" + formatador.format(valorCarrinho));
 				 		System.out.println("-------------------------------------------------------");
 				 		System.out.println("-------------------------------------------------------");
 				 		
@@ -154,4 +167,4 @@ public static void main(String[] args) {
 		 
 	}
 	     
-        } 
+        }
